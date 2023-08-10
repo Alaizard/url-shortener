@@ -18,7 +18,6 @@ function UrlShortener () {
       const data = await response.json()
 
       setShortenedUrl(data.result.full_short_link);
-      console.log(previousUrls)
       setPreviousUrls( [...previousUrls, data.result.full_short_link] );
     } catch (e) {
       alert(e)
@@ -48,7 +47,14 @@ function UrlShortener () {
         </div>
         }
 
-        <div>
+        <div className='urlhistory'>
+          {previousUrls.map(url => {
+            <div className='history'>
+            <CopyToClipboard text={url}>
+              <button onClick={() => alert("The URL has been copied")}>Copy</button>
+            </CopyToClipboard>
+          </div>
+          })}
           {previousUrls}
         </div>
       </div>
